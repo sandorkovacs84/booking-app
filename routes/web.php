@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// List Accommodations 
-Route::get('/accommodations', 'AccommodationController@index');
+    // // List Accommodations 
+    // Route::get('/accommodations', 'AccommodationController@index');
 
 // List rooms 
 Route::get('/rooms', 'RoomController@index');
@@ -27,6 +27,7 @@ Route::get('/demo', function () {
 });
 
 Route::resource('bookings', 'BookingController');
+Route::resource('accommodations', 'AccommodationController');
 
 Auth::routes();
 

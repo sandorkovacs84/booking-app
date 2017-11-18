@@ -17,6 +17,7 @@ class CreateAccommodationsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
+            $table->timestamps();
         });
     }
 
