@@ -2,6 +2,8 @@
 
 return [
 
+    'google_api_key' => env('APP_GOOGLE_API_KEY', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
