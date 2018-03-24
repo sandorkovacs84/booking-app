@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use Illuminate\Http\Request;
+use App\Room;
+use App\User;
 
 class BookingController extends Controller
 {
@@ -25,8 +27,13 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $rooms = Room::all();
+        $users = User::all();
+
+        return view('bookings.create', compact([
+            'rooms', 'users'
+        ]));
     }
 
     /**
@@ -37,7 +44,16 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = new Booking();
+
+        $booking->user_id = $request->input('user');
+        $booking->room_id = $request->input('room');
+        $booking->date_start = $request->input('date_start');
+        $booking->date_end = $request->input('date_end');
+
+        $booking->save();
+
+        return redirect('/bookings');
     }
 
     /**

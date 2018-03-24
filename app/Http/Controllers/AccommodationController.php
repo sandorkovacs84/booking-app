@@ -58,7 +58,7 @@ class AccommodationController extends Controller
      */
     public function show(Accommodation $accommodation)
     {
-        //
+        return view('accommodations.show', compact('accommodation'));
     }
 
     /**
@@ -69,7 +69,7 @@ class AccommodationController extends Controller
      */
     public function edit(Accommodation $accommodation)
     {
-        //
+        return view('accommodations.edit', compact('accommodation'));
     }
 
     /**
@@ -81,7 +81,13 @@ class AccommodationController extends Controller
      */
     public function update(Request $request, Accommodation $accommodation)
     {
-        //
+        // $accomodation->title = $_POST['title']
+        $accommodation->title = $request->input('title'); 
+        $accommodation->description = $request->input('description'); 
+
+        $accommodation->save();
+
+        return redirect('/accommodations/' . $accommodation->id);
     }
 
     /**

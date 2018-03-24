@@ -20,7 +20,8 @@ Route::get('/', function () {
 
 // List rooms 
 Route::get('/rooms', 'RoomController@index');
-
+Route::get('/rooms/create/{accommodation}', 'RoomController@create');
+Route::post('/rooms', 'RoomController@store');
 
 Route::get('/demo', function () {
     return view('demo');

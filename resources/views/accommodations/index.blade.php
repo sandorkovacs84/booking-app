@@ -6,25 +6,48 @@
 
     <h1>Accommodations</h1>
 
+    <a href="/accommodations/create">Create</a>
+    
+    @extends('layouts.app')
 
-            
-            <div id="map" style="width:100%;height:400px;"></div>
-
-
-            <script>
-      function initMap() {
-        var uluru = {lat: 47.0628284, lng: 21.9116};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-
+    @section('content')
+    
+    
+    
+        <h1>Accommodations</h1>
+    
+        <a href="/accommodations/create">Create</a>
+        
+    
+        <table class="table table-bordered">
+            <tr>
+                <th> ID </th>
+                <th> Title </th>
+                <th> Description </th>
+                <th> Nr rooms </th>
+                <th> Actions </th>
+            </tr>
+    
+        @foreach ($accommodations as $accommodation)
+            <tr>
+                <td> {{ $accommodation->id }} </td>
+                <td> 
+                    <a href="/accommodations/{{ $accommodation->id}}">
+                        {{ $accommodation->title }}
+                    </a> 
+                </td>
+                <td> {{ $accommodation->description }} </td>
+                <td> 
+                    {{ $accommodation->rooms->count() }}
+                 </td>
+                <td> 
+                    <a href="/accommodations/{{ $accommodation->id }}/edit" class="btn btn-primary">Edit</a>
+                 </td>
+            </tr>
+        @endforeach
+        </table>
+    
+    @endsection
     <table class="table table-bordered">
         <tr>
             <th> ID </th>
@@ -37,21 +60,20 @@
     @foreach ($accommodations as $accommodation)
         <tr>
             <td> {{ $accommodation->id }} </td>
-            <td> {{ $accommodation->title }} </td>
+            <td> 
+                <a href="/accommodations/{{ $accommodation->id}}">
+                    {{ $accommodation->title }}
+                </a> 
+            </td>
             <td> {{ $accommodation->description }} </td>
             <td> 
                 {{ $accommodation->rooms->count() }}
-                @foreach ($accommodation->rooms as $room)
-                    <br> {{ $room->title }}
-                @endforeach
              </td>
             <td> 
-            
+                <a href="/accommodations/{{ $accommodation->id }}/edit" class="btn btn-primary">Edit</a>
              </td>
         </tr>
     @endforeach
     </table>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('app.google_api_key') }}&callback=initMap"  type="text/javascript"></script>
 
 @endsection
