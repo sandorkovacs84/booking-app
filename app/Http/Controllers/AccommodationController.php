@@ -38,11 +38,13 @@ class AccommodationController extends Controller
     public function store(Request $request)
     {
         // Citim datele din formular 
-        $title = $request->get('title');
-        $description = $request->get('description');
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $city = $request->input('city');
 
         $accommodation = new Accommodation;
         $accommodation->title = $title;
+        $accommodation->city = $city;
         $accommodation->description = $description;
 
         $accommodation->save();
@@ -83,6 +85,7 @@ class AccommodationController extends Controller
     {
         // $accomodation->title = $_POST['title']
         $accommodation->title = $request->input('title'); 
+        $accommodation->city = $request->input('city');
         $accommodation->description = $request->input('description'); 
 
         $accommodation->save();

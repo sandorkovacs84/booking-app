@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <h1>{{ $accommodation->title }}</h1>
+    <h1>{{ $accommodation->title }} {{ $accommodation->city }}</h1>
+    <input type="hidden" class="js-address" value="{{ $accommodation->title }} {{ $accommodation->city }}">
 
+    <div id="map" style="width:100%;height:300px;"></div>
+    
     @if (count($accommodation->rooms))
         <h3>Rooms ({{ $accommodation->rooms->count() }})</h3>
 
@@ -29,5 +32,12 @@
 
     <h3>Description</h3>
     <p>{{ $accommodation->description }}</p>
+
+
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key={{ config('app.google_api_key') }}">
+      </script>
+  
+
 
 @endsection
